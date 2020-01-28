@@ -12,9 +12,13 @@ import dagger.android.support.AndroidSupportInjectionModule;
 // di = dependency injection
 
 // Here AppComponent is a SERVICE and BaseApplication is a CLIENT
-@Component(modules = {
+@Component(
+        modules = {
                 AndroidSupportInjectionModule.class,
-        })
+                ActivityBuildersModule.class,
+                AppModule.class,
+        }
+)
 public interface AppComponent extends AndroidInjector<BaseApplication> { // inject BaseApplication "into" AppComponent
 
     @Component.Builder
