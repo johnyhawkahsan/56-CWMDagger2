@@ -3,8 +3,12 @@ package com.johnyhawkdesigns.a56_cwmdagger2;
 import androidx.appcompat.app.AppCompatActivity;
 import dagger.android.support.DaggerAppCompatActivity;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
+
+import com.bumptech.glide.RequestManager;
 
 import javax.inject.Inject;
 
@@ -13,15 +17,27 @@ public class AuthActivity extends DaggerAppCompatActivity { // Instead of AppCom
 
     private static final String TAG = AuthActivity.class.getSimpleName();
 
-    // Just by using "Inject" annotation, we receive what "Provides" annotation which was provided inside AppModule.
+    // Just by using "Inject" annotation, we receive what "Provides" annotation provides inside "AppModule" class.
     @Inject
-    String testString;
+    Drawable logo;
+
+    @Inject
+    RequestManager requestManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
 
-        Log.d(TAG, "onCreate: " + testString);
+        setLogo();
+
     }
+
+    private void setLogo(){
+        requestManager
+                .load(logo)
+                .into((ImageView)findViewById(R.id.login_logo));
+    }
+
+
 }
