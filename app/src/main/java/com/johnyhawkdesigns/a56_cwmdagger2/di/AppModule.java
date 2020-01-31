@@ -15,9 +15,12 @@ import androidx.core.content.ContextCompat;
 import dagger.Module;
 import dagger.Provides;
 
-// App module has app location level dependencies
+// @Module are responsible for providing objects which can be injected
+// Such classes can define methods annotated with @Provides
+// The returned objects from these methods are available for dependency injection.
 @Module
 public class AppModule {
+
 
     @Singleton
     @Provides

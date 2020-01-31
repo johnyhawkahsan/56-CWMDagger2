@@ -17,6 +17,7 @@ public class AuthActivity extends DaggerAppCompatActivity { // Instead of AppCom
 
     private static final String TAG = AuthActivity.class.getSimpleName();
 
+    // @Inject annotation is used to define a dependency.
     // Just by using "Inject" annotation, we receive what "Provides" annotation provides inside "AppModule" class.
     @Inject
     Drawable logo;
