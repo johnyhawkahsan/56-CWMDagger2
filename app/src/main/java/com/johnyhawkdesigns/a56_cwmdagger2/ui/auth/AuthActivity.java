@@ -1,14 +1,15 @@
-package com.johnyhawkdesigns.a56_cwmdagger2;
+package com.johnyhawkdesigns.a56_cwmdagger2.ui.auth;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 import dagger.android.support.DaggerAppCompatActivity;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.RequestManager;
+import com.johnyhawkdesigns.a56_cwmdagger2.R;
+import com.johnyhawkdesigns.a56_cwmdagger2.viewmodels.ViewModelProviderFactory;
 
 import javax.inject.Inject;
 
@@ -17,8 +18,12 @@ public class AuthActivity extends DaggerAppCompatActivity { // Instead of AppCom
 
     private static final String TAG = AuthActivity.class.getSimpleName();
 
-    // @Inject annotation is used to define a dependency.
-    // Just by using "Inject" annotation, we receive what "Provides" annotation provides inside "AppModule" class.
+    private AuthViewModel viewModel;
+
+    // @Inject annotation is used to define a dependency - Just by using "Inject" annotation, we receive what "Provides" annotation provides inside "AppModule" class.
+    @Inject
+    ViewModelProviderFactory viewModelProviderFactory;
+
     @Inject
     Drawable logo;
 
@@ -31,6 +36,8 @@ public class AuthActivity extends DaggerAppCompatActivity { // Instead of AppCom
         setContentView(R.layout.activity_auth);
 
         setLogo();
+
+        viewModel = ViewModelProviders.of(this, viewModelProviderFactory).get(AuthViewModel.class);
 
     }
 

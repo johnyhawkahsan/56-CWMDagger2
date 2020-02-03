@@ -16,6 +16,8 @@ public class ViewModelProviderFactory implements ViewModelProvider.Factory {
 
     private final Map<Class<? extends ViewModel>, Provider<ViewModel>> creators;
 
+    // 1st parameter = Class<? extends ViewModel> means any class that extends ViewModel
+    // 2nd parameter = Provider<ViewModel> - Any provider of ViewModel
     @Inject
     public ViewModelProviderFactory(Map<Class<? extends ViewModel>, Provider<ViewModel>> creators) {
         this.creators = creators;
