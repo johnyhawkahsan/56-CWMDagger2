@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat;
 import dagger.Module;
 import dagger.Provides;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 // @Module are responsible for providing objects which can be injected
@@ -30,6 +31,7 @@ public class AppModule { // AppModule holds components that are required through
         return new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create()) // Convert returned result into json using gson factory
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // Inside "AuthApi" we can now use Flawable instead of Call
                 .build();
     }
 
@@ -43,7 +45,7 @@ public class AppModule { // AppModule holds components that are required through
 
     @Singleton
     @Provides
-    static RequestManager provideGlideInstance(Application application, RequestOptions requestOptions){
+    static RequestManager provideGlideInstance(Application application, RequestOptions requestOptions){ // requestOptions are provided by above method "provideRequestOptions"
         return Glide.with(application)
                 .setDefaultRequestOptions(requestOptions);
     }

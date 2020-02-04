@@ -18,17 +18,19 @@ public class AuthActivity extends DaggerAppCompatActivity { // Instead of AppCom
 
     private static final String TAG = AuthActivity.class.getSimpleName();
 
-    private AuthViewModel viewModel;
+    private AuthViewModel viewModel; // We are using ViewModel to provide data to AuthActivity
 
     // @Inject annotation is used to define a dependency - Just by using "Inject" annotation, we receive what "Provides" annotation provides inside "AppModule" class.
     @Inject
-    ViewModelProviderFactory viewModelProviderFactory;
+    ViewModelProviderFactory viewModelProviderFactory; // ViewModelFactoryModule = ViewModelProvider.Factory bindViewModelFactory()
 
     @Inject
-    Drawable logo;
+    Drawable logo; // AppModule = Provided by Drawable provideAppDrawable(Application application)
 
     @Inject
-    RequestManager requestManager;
+    RequestManager requestManager; // AppModule = Provided by RequestManager provideGlideInstance
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class AuthActivity extends DaggerAppCompatActivity { // Instead of AppCom
 
         setLogo();
 
+        // Initialize viewModel (NOTE: it is giving error of deprecated but it is working)
         viewModel = ViewModelProviders.of(this, viewModelProviderFactory).get(AuthViewModel.class);
 
     }

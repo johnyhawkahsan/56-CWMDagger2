@@ -9,7 +9,8 @@ import javax.inject.Singleton;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-
+// NOTE: This class is created to overcome some problem which is mentioned by Mitch in the following video
+// https://codingwithmitch.com/courses/dagger22-android/injecting-viewmodels-dagger2-android-map-multibind/
 public class ViewModelProviderFactory implements ViewModelProvider.Factory {
 
     private static final String TAG = ViewModelProviderFactory.class.getSimpleName();
