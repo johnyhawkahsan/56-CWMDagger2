@@ -21,7 +21,7 @@ public class AuthViewModel extends ViewModel {
 
     private final AuthApi authApi;
 
-    private MediatorLiveData<User> authUser = new MediatorLiveData<>();
+    private MediatorLiveData<AuthResource<User>> authUser = new MediatorLiveData<>();
 
     // This Inject method receives AuthViewModel method from "AuthViewModelsModule"
     @Inject
@@ -29,10 +29,6 @@ public class AuthViewModel extends ViewModel {
 
         this.authApi = authApi;
         Log.d(TAG, "AuthViewModel: viewmodel is wokring....");
-
-        // use authApi flowable type (RxJava object) to retrieve user id
-        // authApi.getUser(1) // Not using RxJava anymore
-
 
     }
 
@@ -54,7 +50,7 @@ public class AuthViewModel extends ViewModel {
     }
 
     // return LiveData object from MediatorLiveData
-    public LiveData<User> observeUser(){
+    public LiveData<AuthResource<User>> observeUser(){
         return authUser;
     }
 

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.bumptech.glide.RequestManager;
 import com.johnyhawkdesigns.a56_cwmdagger2.R;
@@ -27,6 +28,7 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
     private AuthViewModel viewModel; // We are using ViewModel to provide data to AuthActivity
 
     private EditText userId;
+    private ProgressBar progressBar;
 
     // @Inject annotation is used to define a dependency - Just by using "Inject" annotation, we receive what "Provides" annotation provides inside "AppModule" class.
     @Inject
@@ -46,6 +48,8 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_auth);
 
         userId = findViewById(R.id.user_id_input);
+        progressBar = findViewById(R.id.progress_bar);
+
         findViewById(R.id.login_button).setOnClickListener(this);
 
         // Initialize viewModel (NOTE: it is giving error of deprecated but it is working)
@@ -58,15 +62,36 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
 
     // observeUser() will return authUser which is of type MediatorLiveData
     private void subscribeObservers() {
-        viewModel.observeUser().observe(this, new Observer<User>() {
+        viewModel.observeUser().observe(this, new Observer<AuthResource<User>>() {
             @Override
-            public void onChanged(User user) {
-                if (user != null){
-                    Log.d(TAG, "onChanged: user email = " + user.getEmail());
+            public void onChanged(AuthResource<User> userAuthResource) {
+                if(userAuthResource != null){
+                    switch (userAuthResource.status){
+                        case LOADING:{
+                            showProgressBar(false);
+                            break;
+                        }
+
+                        case AUTHENTICATED:{
+                            showProgressBar(false);
+                            break;
+                        }
+
+                        case ERROR:{
+                            showProgressBar(false);
+                            break;
+                        }
+
+                        case NOT_AUTHENTICATED:{
+                            showProgressBar(false);
+                            break;
+                        }
+                    }
                 }
             }
         });
     }
+
 
     private void setLogo(){
         requestManager
@@ -94,4 +119,13 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
         viewModel.authenticateWithId(Integer.parseInt(userId.getText().toString()));
 
     }
+
+    private void showProgressBar(boolean isVisible){
+        if(isVisible){
+            progressBar.setVisibility(View.VISIBLE);
+        }else{
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+
 }
