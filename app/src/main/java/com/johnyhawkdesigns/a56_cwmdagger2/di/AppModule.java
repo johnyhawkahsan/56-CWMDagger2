@@ -31,7 +31,7 @@ public class AppModule { // AppModule holds components that are required through
         return new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create()) // Convert returned result into json using gson factory
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // Inside "AuthApi" we can now use Flawable instead of Call
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // Inside "AuthApi" we can now use Flowable instead of Call
                 .build();
     }
 

@@ -15,6 +15,7 @@ import dagger.multibindings.IntoMap;
 @Module
 public abstract class AuthViewModelsModule {
 
+    // This method is used/injected inside "AuthViewModel" class
     @Binds
     @IntoMap
     @ViewModelKey(AuthViewModel.class)
