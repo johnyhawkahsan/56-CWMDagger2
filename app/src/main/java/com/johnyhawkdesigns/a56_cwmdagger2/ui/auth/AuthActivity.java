@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.bumptech.glide.RequestManager;
 import com.johnyhawkdesigns.a56_cwmdagger2.R;
@@ -66,6 +67,7 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
             @Override
             public void onChanged(AuthResource<User> userAuthResource) {
                 if(userAuthResource != null){
+                    Log.d(TAG, "onChanged: status = " + userAuthResource.status);
                     switch (userAuthResource.status){
                         case LOADING:{
                             showProgressBar(false);
@@ -74,11 +76,17 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
 
                         case AUTHENTICATED:{
                             showProgressBar(false);
+                            Log.d(TAG, "onChanged: LOGIN SUCCESS: " + userAuthResource.data.getEmail());
                             break;
                         }
 
                         case ERROR:{
                             showProgressBar(false);
+                            Log.e(TAG, "onChanged: " + userAuthResource.message);
+                            Toast.makeText(AuthActivity.this,
+                                    userAuthResource.message + "\nDid you enter a number between 0 and 10?",
+                                    Toast.LENGTH_SHORT)
+                                    .show();
                             break;
                         }
 
