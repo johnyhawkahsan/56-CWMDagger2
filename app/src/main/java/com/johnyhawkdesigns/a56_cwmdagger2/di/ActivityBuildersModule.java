@@ -4,6 +4,7 @@ package com.johnyhawkdesigns.a56_cwmdagger2.di;
 import com.johnyhawkdesigns.a56_cwmdagger2.di.auth.AuthModule;
 import com.johnyhawkdesigns.a56_cwmdagger2.di.auth.AuthViewModelsModule;
 import com.johnyhawkdesigns.a56_cwmdagger2.ui.auth.AuthActivity;
+import com.johnyhawkdesigns.a56_cwmdagger2.ui.main.MainActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -22,4 +23,7 @@ public abstract class ActivityBuildersModule {
     )
     abstract AuthActivity contributeAuthActivity(); // This method has an AuthActivity return type
 
+
+    @ContributesAndroidInjector
+    abstract MainActivity contributeMainActivity(); // This method defines MainActivity's scope
 }

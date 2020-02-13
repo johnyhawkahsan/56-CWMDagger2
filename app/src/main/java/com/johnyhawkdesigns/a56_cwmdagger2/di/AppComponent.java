@@ -3,6 +3,7 @@ package com.johnyhawkdesigns.a56_cwmdagger2.di;
 import android.app.Application;
 
 import com.johnyhawkdesigns.a56_cwmdagger2.BaseApplication;
+import com.johnyhawkdesigns.a56_cwmdagger2.SessionManager;
 
 import javax.inject.Singleton;
 
@@ -24,6 +25,9 @@ import dagger.android.support.AndroidSupportInjectionModule;
         }
 )
 public interface AppComponent extends AndroidInjector<BaseApplication> { // inject BaseApplication "into" AppComponent
+
+    // We can use this SessionManager for injection now
+    SessionManager sessionManager();
 
     @Component.Builder
     interface Builder{

@@ -4,6 +4,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import dagger.android.support.DaggerAppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.bumptech.glide.RequestManager;
 import com.johnyhawkdesigns.a56_cwmdagger2.R;
 import com.johnyhawkdesigns.a56_cwmdagger2.models.User;
+import com.johnyhawkdesigns.a56_cwmdagger2.ui.main.MainActivity;
 import com.johnyhawkdesigns.a56_cwmdagger2.viewmodels.ViewModelProviderFactory;
 
 import javax.inject.Inject;
@@ -61,9 +63,9 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
         subscribeObservers();
     }
 
-    // observeUser() will return authUser which is of type MediatorLiveData
+    // observeAuthState() will return authUser which is of type MediatorLiveData
     private void subscribeObservers() {
-        viewModel.observeUser().observe(this, new Observer<AuthResource<User>>() {
+        viewModel.observeAuthState().observe(this, new Observer<AuthResource<User>>() {
             @Override
             public void onChanged(AuthResource<User> userAuthResource) {
                 if(userAuthResource != null){
@@ -77,12 +79,13 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
                         case AUTHENTICATED:{
                             showProgressBar(false);
                             Log.d(TAG, "onChanged: LOGIN SUCCESS: " + userAuthResource.data.getEmail());
+                            onLoginSuccess(); // Redirect the user to MainActivity class
                             break;
                         }
 
                         case ERROR:{
                             showProgressBar(false);
-                            Log.e(TAG, "onChanged: " + userAuthResource.message);
+                            Log.e(TAG, "onChanged: " + userAuthResource.message + "\nDid you enter a number between 0 and 10?");
                             Toast.makeText(AuthActivity.this,
                                     userAuthResource.message + "\nDid you enter a number between 0 and 10?",
                                     Toast.LENGTH_SHORT)
@@ -98,6 +101,13 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
                 }
             }
         });
+    }
+
+    // Redirect the user to MainActivity class
+    private void onLoginSuccess(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 
