@@ -20,7 +20,7 @@ public class BaseActivity extends DaggerAppCompatActivity {
     private static final String TAG = BaseActivity.class.getSimpleName();
 
     @Inject
-    private SessionManager sessionManager;
+    public SessionManager sessionManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
