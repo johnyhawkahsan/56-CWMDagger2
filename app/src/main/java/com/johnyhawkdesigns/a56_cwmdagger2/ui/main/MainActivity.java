@@ -1,6 +1,7 @@
 package com.johnyhawkdesigns.a56_cwmdagger2.ui.main;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -8,6 +9,7 @@ import android.widget.Toast;
 
 import com.johnyhawkdesigns.a56_cwmdagger2.BaseActivity;
 import com.johnyhawkdesigns.a56_cwmdagger2.R;
+import com.johnyhawkdesigns.a56_cwmdagger2.ui.main.profile.ProfileFragment;
 
 import androidx.annotation.Nullable;
 
@@ -21,6 +23,15 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
 
         Toast.makeText(this, "MainActivity", Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "onCreate: MainActivity");
+
+        testFragment();
+    }
+
+    private void testFragment() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_container, new ProfileFragment())
+                .commit();
     }
 
     @Override
