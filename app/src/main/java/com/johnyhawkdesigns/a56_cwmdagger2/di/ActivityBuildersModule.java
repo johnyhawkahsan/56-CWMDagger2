@@ -4,6 +4,7 @@ package com.johnyhawkdesigns.a56_cwmdagger2.di;
 import com.johnyhawkdesigns.a56_cwmdagger2.di.auth.AuthModule;
 import com.johnyhawkdesigns.a56_cwmdagger2.di.auth.AuthViewModelsModule;
 import com.johnyhawkdesigns.a56_cwmdagger2.di.main.MainFragmentBuildersModule;
+import com.johnyhawkdesigns.a56_cwmdagger2.di.main.MainViewModelsModule;
 import com.johnyhawkdesigns.a56_cwmdagger2.ui.auth.AuthActivity;
 import com.johnyhawkdesigns.a56_cwmdagger2.ui.main.MainActivity;
 
@@ -19,7 +20,7 @@ public abstract class ActivityBuildersModule {
     // We want to Add AuthActivity to our list of Activity Scope
     @ContributesAndroidInjector(
             modules = {
-                    AuthViewModelsModule.class,
+                    AuthViewModelsModule.class, // This class provides reference of AuthViewModel to AuthActivity.
                     AuthModule.class
             }
     )
@@ -29,7 +30,8 @@ public abstract class ActivityBuildersModule {
     // We want to Add MainActivity to our list of Activity Scope
     @ContributesAndroidInjector(
             modules = {
-                    MainFragmentBuildersModule.class // This module holds reference to FRAGMENTS
+                    MainFragmentBuildersModule.class, // This module holds reference to FRAGMENTS
+                    MainViewModelsModule.class, // This class provides reference of ProfileViewModel +  to MainActivity
             }
     )
     abstract MainActivity contributeMainActivity(); // This method defines MainActivity's scope
