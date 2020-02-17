@@ -4,6 +4,7 @@ package com.johnyhawkdesigns.a56_cwmdagger2.di;
 import com.johnyhawkdesigns.a56_cwmdagger2.di.auth.AuthModule;
 import com.johnyhawkdesigns.a56_cwmdagger2.di.auth.AuthViewModelsModule;
 import com.johnyhawkdesigns.a56_cwmdagger2.di.main.MainFragmentBuildersModule;
+import com.johnyhawkdesigns.a56_cwmdagger2.di.main.MainModule;
 import com.johnyhawkdesigns.a56_cwmdagger2.di.main.MainViewModelsModule;
 import com.johnyhawkdesigns.a56_cwmdagger2.ui.auth.AuthActivity;
 import com.johnyhawkdesigns.a56_cwmdagger2.ui.main.MainActivity;
@@ -21,7 +22,7 @@ public abstract class ActivityBuildersModule {
     @ContributesAndroidInjector(
             modules = {
                     AuthViewModelsModule.class, // This class provides reference of AuthViewModel to AuthActivity.
-                    AuthModule.class
+                    AuthModule.class // holds reference to AuthApi which holds query to retrieve specific user
             }
     )
     abstract AuthActivity contributeAuthActivity(); // This method has an AuthActivity return type
@@ -32,6 +33,7 @@ public abstract class ActivityBuildersModule {
             modules = {
                     MainFragmentBuildersModule.class, // This module holds reference to FRAGMENTS
                     MainViewModelsModule.class, // This class provides reference of ProfileViewModel +  to MainActivity
+                    MainModule.class, // This class holds reference to "MainApi" which is retrofit query for "posts" of specific user
             }
     )
     abstract MainActivity contributeMainActivity(); // This method defines MainActivity's scope
