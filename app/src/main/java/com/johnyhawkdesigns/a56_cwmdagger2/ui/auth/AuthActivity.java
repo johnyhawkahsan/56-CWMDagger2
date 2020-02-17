@@ -70,9 +70,11 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
             public void onChanged(AuthResource<User> userAuthResource) {
                 if(userAuthResource != null){
                     Log.d(TAG, "onChanged: status = " + userAuthResource.status);
+
                     switch (userAuthResource.status){
+
                         case LOADING:{
-                            showProgressBar(false);
+                            showProgressBar(true);
                             break;
                         }
 
@@ -84,7 +86,7 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
                         }
 
                         case ERROR:{
-                            showProgressBar(false);
+                            showProgressBar(true);
                             Log.e(TAG, "onChanged: " + userAuthResource.message + "\nDid you enter a number between 0 and 10?");
                             Toast.makeText(AuthActivity.this,
                                     userAuthResource.message + "\nDid you enter a number between 0 and 10?",
@@ -94,7 +96,7 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
                         }
 
                         case NOT_AUTHENTICATED:{
-                            showProgressBar(false);
+                            showProgressBar(true);
                             break;
                         }
                     }

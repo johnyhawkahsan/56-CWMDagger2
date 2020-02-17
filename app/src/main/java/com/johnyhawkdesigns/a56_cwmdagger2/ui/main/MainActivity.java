@@ -22,7 +22,6 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toast.makeText(this, "MainActivity", Toast.LENGTH_SHORT).show();
         Log.d(TAG, "onCreate: MainActivity");
 
         testFragment();
