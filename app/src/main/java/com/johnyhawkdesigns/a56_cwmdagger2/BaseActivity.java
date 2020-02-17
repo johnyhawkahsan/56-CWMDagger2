@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import dagger.android.support.DaggerAppCompatActivity;
 
+// Merge successfull
 public class BaseActivity extends DaggerAppCompatActivity {
 
     private static final String TAG = BaseActivity.class.getSimpleName();
