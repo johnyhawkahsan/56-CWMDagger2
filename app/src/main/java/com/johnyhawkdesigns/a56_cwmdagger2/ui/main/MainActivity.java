@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.johnyhawkdesigns.a56_cwmdagger2.BaseActivity;
 import com.johnyhawkdesigns.a56_cwmdagger2.R;
+import com.johnyhawkdesigns.a56_cwmdagger2.ui.main.posts.PostsFragment;
 import com.johnyhawkdesigns.a56_cwmdagger2.ui.main.profile.ProfileFragment;
 
 import androidx.annotation.Nullable;
@@ -29,7 +30,7 @@ public class MainActivity extends BaseActivity {
 
     private void testFragment() {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_container, new ProfileFragment())
+                .replace(R.id.main_container, new PostsFragment())
                 .commit();
     }
 
