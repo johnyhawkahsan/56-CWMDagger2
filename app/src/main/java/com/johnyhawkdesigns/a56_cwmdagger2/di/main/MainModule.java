@@ -1,6 +1,7 @@
 package com.johnyhawkdesigns.a56_cwmdagger2.di.main;
 
 import com.johnyhawkdesigns.a56_cwmdagger2.network.main.MainApi;
+import com.johnyhawkdesigns.a56_cwmdagger2.ui.main.posts.PostRecyclerAdapter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -13,6 +14,11 @@ public class MainModule {
     @Provides
     static MainApi provideMainApi(Retrofit retrofit){
         return retrofit.create(MainApi.class);
+    }
+
+    @Provides
+    static PostRecyclerAdapter provideAdapter(){
+        return new PostRecyclerAdapter();
     }
 
 }

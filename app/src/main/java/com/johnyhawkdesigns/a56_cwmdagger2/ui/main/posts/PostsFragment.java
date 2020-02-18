@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.johnyhawkdesigns.a56_cwmdagger2.R;
 import com.johnyhawkdesigns.a56_cwmdagger2.models.Post;
 import com.johnyhawkdesigns.a56_cwmdagger2.ui.main.Resource;
+import com.johnyhawkdesigns.a56_cwmdagger2.util.VerticalSpaceItemDecoration;
 import com.johnyhawkdesigns.a56_cwmdagger2.viewmodels.ViewModelProviderFactory;
 
 import java.util.List;
@@ -20,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import dagger.android.support.DaggerFragment;
 
@@ -29,6 +31,9 @@ public class PostsFragment extends DaggerFragment {
 
     private PostsViewModel viewModel;
     private RecyclerView recyclerView;
+
+    @Inject
+    PostRecyclerAdapter postRecyclerAdapter;
 
     @Inject
     ViewModelProviderFactory providerFactory;
@@ -49,6 +54,7 @@ public class PostsFragment extends DaggerFragment {
         // instantiate viewModel
         viewModel = ViewModelProviders.of(this, providerFactory).get(PostsViewModel.class);
 
+        initRecyclerView();
         subscribeObservers();
     }
 
@@ -60,9 +66,34 @@ public class PostsFragment extends DaggerFragment {
             public void onChanged(Resource<List<Post>> listResource) {
                 if (listResource != null){
                     Log.d(TAG, "onChanged: listResource.data = " + listResource.data);
+
+                    switch (listResource.status){
+                        case LOADING:{
+                            Log.d(TAG, "onChanged: LOADING.... ");
+                            break;
+                        }
+
+                        case SUCCESS:{
+                            Log.d(TAG, "onChanged: got posts... ");
+                            postRecyclerAdapter.setPosts(listResource.data);
+                            break;
+                        }
+
+                        case ERROR:{
+                            Log.e(TAG, "onChanged: ERROR.... " + listResource.message);
+                            break;
+                        }
+                    }
                 }
             }
         });
+    }
+
+    private void initRecyclerView(){
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        VerticalSpaceItemDecoration itemDecoration = new VerticalSpaceItemDecoration(15);
+        recyclerView.addItemDecoration(itemDecoration);
+        recyclerView.setAdapter(postRecyclerAdapter);
     }
 
 }
