@@ -28,7 +28,7 @@ public class PostsViewModel extends ViewModel {
     private final SessionManager sessionManager;
     private final MainApi mainApi;
 
-    private MediatorLiveData<List<Resource<Post>>> postsList;
+    private MediatorLiveData<Resource<List<Post>>> postsList; // LOL. There was an error like <List<Resource<Post>>>
 
     @Inject
     public PostsViewModel(SessionManager sessionManager, MainApi mainApi){
@@ -77,7 +77,7 @@ public class PostsViewModel extends ViewModel {
                                              return Resource.error("Something went wrong", null);
                                          }
                                      }
-                                     return Resource.success(posts);
+                                     return Resource.success(posts); // if list size is > 0 and also there is no error, then simply return the List<Post>
                                  }
                              })
                              .subscribeOn(Schedulers.io()));
