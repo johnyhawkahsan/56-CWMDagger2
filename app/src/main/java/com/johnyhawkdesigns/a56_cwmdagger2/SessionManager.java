@@ -27,6 +27,7 @@ public class SessionManager {
     public SessionManager() {
     }
 
+    // Authenticate user with the provided id
     public void authenticateWithId(final LiveData<AuthResource<User>> source){
         if (cachedUser != null) {
 

@@ -16,6 +16,6 @@ public class BaseApplication extends DaggerApplication {
     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
         return DaggerAppComponent.builder()
                 .application(this) // call application method inside AppComponent
-                .build();
+                .build(); // call build method inside AppComponent
     }
 }

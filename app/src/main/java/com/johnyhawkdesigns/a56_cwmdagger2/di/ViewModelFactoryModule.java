@@ -10,6 +10,7 @@ import dagger.Module;
 @Module
 abstract public class ViewModelFactoryModule {
 
+    // @Binds is a little different from @Provides - 1st it uses abstract and 2nd, it does not require method body, while Provides requires method body.
     @Binds
     public abstract ViewModelProvider.Factory bindViewModelFactory(ViewModelProviderFactory viewModelFactory);
 }

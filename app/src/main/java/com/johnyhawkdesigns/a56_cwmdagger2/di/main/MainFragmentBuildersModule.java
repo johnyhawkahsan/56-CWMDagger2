@@ -6,6 +6,7 @@ import com.johnyhawkdesigns.a56_cwmdagger2.ui.main.profile.ProfileFragment;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
+// This Module holds reference to our ProfileFragment and PostsFragment
 @Module
 public abstract class MainFragmentBuildersModule {
 

@@ -10,14 +10,16 @@ import retrofit2.Retrofit;
 @Module
 public class MainModule {
 
-    // MainApi returns posts related to specific user i.e: posts?userId=1
+    @MainScope
     @Provides
-    static MainApi provideMainApi(Retrofit retrofit){
+    static MainApi provideMainApi(Retrofit retrofit){ // MainApi returns posts related to specific user i.e: posts?userId=1
         return retrofit.create(MainApi.class);
     }
 
+
+    @MainScope
     @Provides
-    static PostRecyclerAdapter provideAdapter(){
+    static PostRecyclerAdapter provideAdapter(){ // Injected inside PostsFragment
         return new PostRecyclerAdapter();
     }
 

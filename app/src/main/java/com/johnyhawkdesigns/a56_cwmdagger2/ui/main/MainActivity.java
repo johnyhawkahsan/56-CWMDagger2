@@ -40,6 +40,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         init();
     }
 
+    // Initialize NavController for Navigation Component to work -
     private void init(){
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment); // this is placed inside mainActivity.xml
         NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout);
@@ -86,11 +87,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             case R.id.nav_profile:{
 
                 NavOptions navOptions = new NavOptions.Builder() // set custom options for profileScreen
-                        .setPopUpTo(R.id.main, true)
+                        .setPopUpTo(R.id.main, true) // After navigation, pop from BackStack means if we are inside ProfileFragment, if we press back button, app closes.
                         .build();
 
                 Navigation.findNavController(this, R.id.nav_host_fragment).navigate( // nav_host_fragment is inside activity_main.xml
-                        R.id.profileScreen, // profileScreen is inside main.xml in navigation directory
+                        R.id.profileScreen, // profileScreen is inside main.xml in navigation directory - profileScreen holds info about fragment_profile
                         null,
                         navOptions); // in navOptions, we have settings which ensure that profileScreen is not stored in the back stack and when user presses back button on profileScreen, app closes.
                 break;

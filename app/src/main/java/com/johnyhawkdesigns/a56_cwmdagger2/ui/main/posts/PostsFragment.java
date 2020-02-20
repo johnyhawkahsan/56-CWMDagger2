@@ -33,10 +33,10 @@ public class PostsFragment extends DaggerFragment {
     private RecyclerView recyclerView;
 
     @Inject
-    PostRecyclerAdapter postRecyclerAdapter;
+    PostRecyclerAdapter postRecyclerAdapter; // Provided inside MainModule
 
     @Inject
-    ViewModelProviderFactory providerFactory;
+    ViewModelProviderFactory providerFactory; // Provided inside ViewModelFactoryModule
 
     @Nullable
     @Override
@@ -45,6 +45,7 @@ public class PostsFragment extends DaggerFragment {
     }
 
 
+    // We should inflate our widgets inside onViewCreated because it is more safe.
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -58,7 +59,7 @@ public class PostsFragment extends DaggerFragment {
         subscribeObservers();
     }
 
-    // we just call viewmodel's methods here
+    // we just call viewModel's methods here
     private void subscribeObservers(){
         viewModel.observePosts().removeObservers(getViewLifecycleOwner());
         viewModel.observePosts().observe(getViewLifecycleOwner(), new Observer<Resource<List<Post>>>() {
@@ -89,6 +90,7 @@ public class PostsFragment extends DaggerFragment {
         });
     }
 
+    // Initialize RecyclerView
     private void initRecyclerView(){
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         VerticalSpaceItemDecoration itemDecoration = new VerticalSpaceItemDecoration(15);
