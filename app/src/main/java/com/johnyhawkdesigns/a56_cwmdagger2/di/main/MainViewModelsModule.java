@@ -1,6 +1,7 @@
 package com.johnyhawkdesigns.a56_cwmdagger2.di.main;
 
 import com.johnyhawkdesigns.a56_cwmdagger2.di.ViewModelKey;
+import com.johnyhawkdesigns.a56_cwmdagger2.ui.main.posts.PostsViewModel;
 import com.johnyhawkdesigns.a56_cwmdagger2.ui.main.profile.ProfileViewModel;
 
 import androidx.lifecycle.ViewModel;
@@ -15,5 +16,10 @@ public abstract class MainViewModelsModule {
     @IntoMap
     @ViewModelKey(ProfileViewModel.class)
     public abstract ViewModel bindProfileViewModel(ProfileViewModel profileViewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PostsViewModel.class)
+    public abstract ViewModel bindPostsViewModel(PostsViewModel postsViewModel);
 
 }

@@ -21,13 +21,12 @@ import dagger.android.support.AndroidSupportInjectionModule;
                 ActivityBuildersModule.class, // Module to hold all Activities and Fragments
                 AppModule.class, // All app level modules that we want to inject i.e. Glide,
                 ViewModelFactoryModule.class, // Component to bind ViewModelFactoryModule which holds ViewModelProviderFactory binding method
-
         }
 )
 public interface AppComponent extends AndroidInjector<BaseApplication> { // inject BaseApplication "into" AppComponent
 
     // We can use this SessionManager for injection now
-    SessionManager sessionManager();
+    SessionManager sessionManager(); //  I don't even know what is the purpose of SessionManager here.
 
     @Component.Builder
     interface Builder{
